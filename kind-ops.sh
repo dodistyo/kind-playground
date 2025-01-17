@@ -1,7 +1,8 @@
 #!/bin/sh
 
 stop_kind_cluster() {
-    docker ps -q --filter "name=local" | xargs -r docker stop
+    docker ps -q --filter "name=local" | xargs -r docker stop && \
+    docker ps -q --filter "name=local" | xargs -r docker update --restart=no
 }
 
 start_kind_cluster() {
