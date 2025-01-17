@@ -1,0 +1,40 @@
+---
+apiVersion: getambassador.io/v3alpha1
+kind: Listener
+metadata:
+  name: http-listener
+  namespace: platform
+  annotations:
+    argocd.argoproj.io/sync-wave: "500"
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
+spec:
+  port: 8080
+  protocol: HTTPS  # NOT A TYPO, see below
+  securityModel: XFP
+  hostBinding:
+    namespace:
+      from: ALL    # SELF/ALL
+---
+apiVersion: getambassador.io/v3alpha1
+kind: Listener
+metadata:
+  name: https-listener
+  namespace: platform
+  annotations:
+    argocd.argoproj.io/sync-wave: "500"
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
+spec:
+  port: 8443
+  protocol: HTTPS
+  securityModel: XFP
+  hostBinding:
+    namespace:
+      from: ALL   # SELF/ALL
+
+# Both Listeners use protocol: HTTPS to allow Envoy to inspect incoming connections, determine whether or not TLS is in play, and set X-Forwarded-Proto appropriately. The securityModel then specifies that X-Forwarded-Proto will determine whether requests will be considered secure or insecure.
+
+# The hostBinding shown here will allow any Host in the same namespace as the Listeners to be associated with both Listeners; in turn, that will allow access to that Host's Mappings from either port. For greater control, use a selector instead.
+
+# Note that the Listeners do not specify anything about TLS certificates. The Host handles that; see below.
+
+

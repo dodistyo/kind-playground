@@ -1,0 +1,4 @@
+helm repo add datawire https://app.getambassador.io && \
+kubectl apply -f https://app.getambassador.io/yaml/emissary/3.9.1/emissary-crds.yaml && \
+kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system && \
+helm install -n platform --create-namespace emissary datawire/emissary-ingress -f helm-values.yaml --version 8.9.1

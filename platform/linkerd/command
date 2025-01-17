@@ -1,0 +1,4 @@
+helm repo add linkerd2 https://helm.linkerd.io/stable && \
+helm install linkerd-crds linkerd2/linkerd-crds --version 1.8.0 && \
+helm install linkerd linkerd2/linkerd-control-plane -n linkerd --create-namespace --version 1.16.11 -f helm-values.yaml && \
+helm install linkerd-viz linkerd2/linkerd-viz -n linkerd-viz --create-namespace --version 30.12.11

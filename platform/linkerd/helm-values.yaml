@@ -1,0 +1,47 @@
+identityTrustAnchorsPEM: |
+  -----BEGIN CERTIFICATE-----
+  MIIBkDCCATWgAwIBAgIQS1TA4BGaYWvOh4PdYmQRpTAKBggqhkjOPQQDAjAlMSMw
+  IQYDVQQDExpyb290LmxpbmtlcmQuY2x1c3Rlci5sb2NhbDAgFw0yNDA3MjcxMDEz
+  MDJaGA8yMDU0MDcyNzIyMTMwMlowJTEjMCEGA1UEAxMacm9vdC5saW5rZXJkLmNs
+  dXN0ZXIubG9jYWwwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQaNwdoxA3CteQx
+  K25GemsH9X1hoS0jk4o+zgk7A48IjYTpm9BCPGOtuPCbJkcEher1RrbMt9iWy2CU
+  kUJm21sdo0UwQzAOBgNVHQ8BAf8EBAMCAQYwEgYDVR0TAQH/BAgwBgEB/wIBATAd
+  BgNVHQ4EFgQUobkY02utMlcFT+UD1SoZ/GU2Mt0wCgYIKoZIzj0EAwIDSQAwRgIh
+  AJZR27t7AGPu0Hi1LEVq607zlL/WZ7MyVh8IQwCrck2vAiEA2/X9qvEWOIo0qj+W
+  V2bZ4C6nQO7hGktmsYaqWlZxGKc=
+  -----END CERTIFICATE-----
+identity:
+  # -- If the linkerd-identity-trust-roots ConfigMap has already been created
+  externalCA: false
+  # -- Use [Service Account token Volume projection](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#service-account-token-volume-projection) for pod validation instead of the default token
+  serviceAccountTokenProjection: true
+  issuer:
+    scheme: linkerd.io/tls
+    # -- Amount of time to allow for clock skew within a Linkerd cluster
+    clockSkewAllowance: 20s
+    # -- Amount of time for which the Identity issuer should certify identity
+    issuanceLifetime: 24h0m0s
+    # -- Which scheme is used for the identity issuer secret format
+    tls:
+      # -- Issuer certificate (ECDSA). It must be provided during install.
+      crtPEM: |
+        -----BEGIN CERTIFICATE-----
+        MIIBszCCAVmgAwIBAgIRAObMm4dzsYjrW8wLdD0R4iAwCgYIKoZIzj0EAwIwJTEj
+        MCEGA1UEAxMacm9vdC5saW5rZXJkLmNsdXN0ZXIubG9jYWwwHhcNMjQwNzI3MTAx
+        NDAwWhcNMjUwNzI3MTAxNDAwWjApMScwJQYDVQQDEx5pZGVudGl0eS5saW5rZXJk
+        LmNsdXN0ZXIubG9jYWwwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATQx3R6zsiL
+        NqLNX7OhT7RMzku07I/dJ44W2l7rDK6rfvqxGMd0iQmOdqId0ks/9a5AcGwLcrR8
+        fwySWQWUYp0yo2YwZDAOBgNVHQ8BAf8EBAMCAQYwEgYDVR0TAQH/BAgwBgEB/wIB
+        ADAdBgNVHQ4EFgQUJn4jE/Y74A14NMzAZ7FgR/hF6bIwHwYDVR0jBBgwFoAUobkY
+        02utMlcFT+UD1SoZ/GU2Mt0wCgYIKoZIzj0EAwIDSAAwRQIgL1jOKlHkXO3qWAmN
+        mgSGMKb3ggIKv1s/+irdf2GTBm4CIQCioTT+u3ohxw5iXpXF01RKXunIosyHKhj7
+        Oc0cHGoukg==
+        -----END CERTIFICATE-----
+      # -- Key for the issuer certificate (ECDSA). It must be provided during
+      # install
+      keyPEM: |
+        -----BEGIN EC PRIVATE KEY-----
+        MHcCAQEEIHGLadeE4wK3EM9B1Xnfyqk5p49fmFTEaCsRdB4BT9ERoAoGCCqGSM49
+        AwEHoUQDQgAE0Md0es7IizaizV+zoU+0TM5LtOyP3SeOFtpe6wyuq376sRjHdIkJ
+        jnaiHdJLP/WuQHBsC3K0fH8MklkFlGKdMg==
+        -----END EC PRIVATE KEY-----

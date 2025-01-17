@@ -1,0 +1,13 @@
+adminUser: dodi
+adminPassword: dodi
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+    - name: "Common Tools"
+      type: prometheus
+      url: http://prometheus-server.monitoring
+      access: proxy
+      isDefault: true
+persistence:
+  enabled: true

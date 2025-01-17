@@ -1,0 +1,48 @@
+---
+apiVersion: getambassador.io/v3alpha1
+kind: Host
+metadata:
+  name: linkerd-dashboard-host
+spec:
+  hostname: mesh.do.di
+  tlsSecret:
+    name: selfsigned-tls
+  requestPolicy:
+    insecure:
+      action: Redirect
+---
+apiVersion: getambassador.io/v3alpha1
+kind: Host
+metadata:
+  name: grafana-host
+spec:
+  hostname: monitoring.do.di
+  tlsSecret:
+    name: selfsigned-tls
+  requestPolicy:
+    insecure:
+      action: Redirect
+---
+apiVersion: getambassador.io/v3alpha1
+kind: Host
+metadata:
+  name: prometheus-server-host
+spec:
+  hostname: metrics.do.di
+  tlsSecret:
+    name: selfsigned-tls
+  requestPolicy:
+    insecure:
+      action: Redirect
+---
+apiVersion: getambassador.io/v3alpha1
+kind: Host
+metadata:
+  name: hubble-host
+spec:
+  hostname: network.do.di
+  tlsSecret:
+    name: selfsigned-tls
+  requestPolicy:
+    insecure:
+      action: Redirect

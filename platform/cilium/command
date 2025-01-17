@@ -1,0 +1,3 @@
+helm repo add cilium https://helm.cilium.io/ && \
+helm install cilium cilium/cilium -f helm-values.yaml --version 1.16.5 \
+  --namespace kube-system

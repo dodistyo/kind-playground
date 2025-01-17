@@ -1,0 +1,46 @@
+---
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
+metadata:
+  name: grafana-map
+spec:
+  hostname: monitoring.do.di
+  prefix: /
+  service: grafana.monitoring
+  timeout_ms: 180000 # 3 minutes
+  bypass_auth: true
+---
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
+metadata:
+  name: linkerd-dashboard-map
+spec:
+  hostname: mesh.do.di
+  prefix: /
+  service: web.linkerd-viz:8084
+  timeout_ms: 60000
+  allow_upgrade:
+    - websocket
+  bypass_auth: true
+---
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
+metadata:
+  name: prometheus-server-map
+spec:
+  hostname: metrics.do.di
+  prefix: /
+  service: prometheus-server.monitoring
+  timeout_ms: 60000
+  bypass_auth: true
+---
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
+metadata:
+  name: hubble-map
+spec:
+  hostname: network.do.di
+  prefix: /
+  service: hubble-ui.kube-system
+  timeout_ms: 60000
+  bypass_auth: true

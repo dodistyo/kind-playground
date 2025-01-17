@@ -1,0 +1,2 @@
+helm repo add cert-manager https://charts.jetstack.io && \
+helm install cert-manager cert-manager/cert-manager --create-namespace -n platform -f helm-values.yaml --version 1.16.3

@@ -1,0 +1,16 @@
+service:
+  loadBalancerIP: 172.18.1.100
+agent:
+  enabled: false
+env:
+  AMBASSADOR_ID: default
+resources:
+  limits:
+    cpu: 100m
+    memory: 512Mi
+  requests:
+    cpu: 50m
+    memory: 256Mi
+podAnnotations:
+  linkerd.io/inject: enabled
+  config.linkerd.io/skip-inbound-ports: "8443"

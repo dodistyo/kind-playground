@@ -1,0 +1,4 @@
+resources:
+- metallb.yaml
+- cert-manager.yaml
+- emissary-ingress.yaml

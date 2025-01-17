@@ -1,0 +1,14 @@
+dashboard:
+  enforcedHostRegexp: .*\.do\.di.*
+  resources:
+    limits:
+      cpu: 200m
+      memory: 256Mi
+    requests:
+      cpu: 100m
+      memory: 64Mi
+prometheusUrl: "http://prometheus-server.monitoring"
+prometheus:
+  enabled: false
+grafana:
+  url: http://grafana.monitoring

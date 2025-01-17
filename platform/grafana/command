@@ -1,0 +1,3 @@
+helm repo add grafana https://grafana.github.io/helm-charts && \ 
+helm install grafana grafana/grafana -f helm-values.yaml --version 8.8.4 \
+  --namespace monitoring
