@@ -4,7 +4,7 @@ kind: Mapping
 metadata:
   name: grafana-map
 spec:
-  hostname: monitoring.do.di
+  hostname: monitoring.app.me
   prefix: /
   service: grafana.monitoring
   timeout_ms: 180000 # 3 minutes
@@ -15,7 +15,7 @@ kind: Mapping
 metadata:
   name: linkerd-dashboard-map
 spec:
-  hostname: mesh.do.di
+  hostname: mesh.app.me
   prefix: /
   service: web.linkerd-viz:8084
   timeout_ms: 60000
@@ -28,7 +28,7 @@ kind: Mapping
 metadata:
   name: prometheus-server-map
 spec:
-  hostname: metrics.do.di
+  hostname: metrics.app.me
   prefix: /
   service: prometheus-server.monitoring
   timeout_ms: 60000
@@ -39,7 +39,7 @@ kind: Mapping
 metadata:
   name: hubble-map
 spec:
-  hostname: network.do.di
+  hostname: network.app.me
   prefix: /
   service: hubble-ui.kube-system
   timeout_ms: 60000

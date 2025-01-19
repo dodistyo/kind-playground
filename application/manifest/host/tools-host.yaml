@@ -3,8 +3,10 @@ apiVersion: getambassador.io/v3alpha1
 kind: Host
 metadata:
   name: linkerd-dashboard-host
+  annotations:
+    external-dns.ambassador-service: emissary-emissary-ingress.platform
 spec:
-  hostname: mesh.do.di
+  hostname: mesh.app.me
   tlsSecret:
     name: selfsigned-tls
   requestPolicy:
@@ -15,8 +17,10 @@ apiVersion: getambassador.io/v3alpha1
 kind: Host
 metadata:
   name: grafana-host
+  annotations:
+    external-dns.ambassador-service: emissary-emissary-ingress.platform
 spec:
-  hostname: monitoring.do.di
+  hostname: monitoring.app.me
   tlsSecret:
     name: selfsigned-tls
   requestPolicy:
@@ -27,8 +31,10 @@ apiVersion: getambassador.io/v3alpha1
 kind: Host
 metadata:
   name: prometheus-server-host
+  annotations:
+    external-dns.ambassador-service: emissary-emissary-ingress.platform
 spec:
-  hostname: metrics.do.di
+  hostname: metrics.app.me
   tlsSecret:
     name: selfsigned-tls
   requestPolicy:
@@ -39,8 +45,10 @@ apiVersion: getambassador.io/v3alpha1
 kind: Host
 metadata:
   name: hubble-host
+  annotations:
+    external-dns.ambassador-service: emissary-emissary-ingress.platform
 spec:
-  hostname: network.do.di
+  hostname: network.app.me
   tlsSecret:
     name: selfsigned-tls
   requestPolicy:

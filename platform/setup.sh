@@ -1,5 +1,17 @@
 #!/bin/bash
 
+add_helm_charts() {
+  helm repo add cilium https://helm.cilium.io/ && \
+  helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/ && \
+  helm repo add metallb https://metallb.github.io/metallb && \
+  # helm repo add external-dns https://kubernetes-sigs.github.io/external-dns/ && \
+  helm repo add prometheus-community https://prometheus-community.github.io/helm-charts && \
+  helm repo add grafana https://grafana.github.io/helm-charts && \
+  helm repo add cert-manager https://charts.jetstack.io && \
+  helm repo add linkerd2 https://helm.linkerd.io/stable && \
+  helm repo add datawire https://app.getambassador.io
+}
+
 install_cilium() {
   # Cilium
   helm install cilium cilium/cilium -f cilium/helm-values.yaml --version 1.16.5 --namespace kube-system
@@ -13,6 +25,11 @@ install_metrics_server() {
 install_metallb() {
   # Metallb
   helm install metallb metallb/metallb --version 0.14.9 --create-namespace --namespace platform
+}
+
+install_external_dns() {
+  # External DNS
+  helm install external-dns external-dns/external-dns --version 1.15.0 -n platform --create-namespace -f external-dns/helm-values.yaml
 }
 
 install_prometheus() {
@@ -50,16 +67,21 @@ setup() {
 
 install_all() {
   # install_cilium && \
+  # install_external_dns && \
   install_metrics_server && \
   install_metallb && \
   install_prometheus && \
   install_grafana && \
   install_linkerd && \
   install_emissary && \
+  install_cert_manager && \
   setup
 }
 
 case "$1" in
+  add-helm-charts)
+    add_helm_charts
+    ;;
   cilium)
     install_cilium
     ;;
@@ -68,6 +90,9 @@ case "$1" in
     ;;
   metallb)
     install_metallb
+    ;;
+  external-dns)
+    install_external_dns
     ;;
   prometheus)
     install_prometheus
@@ -91,7 +116,7 @@ case "$1" in
     install_all
     ;;
   *)
-    echo "Usage: $0 [cilium|metrics-server|metallb|prometheus|grafana|cert-manager|linkerd|emissary|all]"
+    echo "Usage: $0 [add-helm-charts|cilium|metrics-server|metallb|external-dns|prometheus|grafana|cert-manager|linkerd|emissary|all]"
     exit 1
     ;;
 esac

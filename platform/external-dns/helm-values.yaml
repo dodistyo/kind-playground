@@ -1,0 +1,24 @@
+resources:
+  requests:
+    cpu: 10m
+    memory: 32Mi
+  limits:
+    cpu: 20m
+    memory: 64Mi
+policy: sync # upsert-only (prevent deletion)
+sources:
+  - ambassador-host
+  - service
+  - ingress
+domainFilters:
+  - app.me
+provider: rfc2136
+logLevel: debug
+extraArgs:
+  - --rfc2136-host=172.18.0.1
+  - --rfc2136-port=53
+  - --rfc2136-zone=app.me
+  - --rfc2136-tsig-keyname=externaldns-key
+  - --rfc2136-tsig-secret=m7yepOi/rl0608SKKH6Z350WZcPuu+026Ub04FlW9N4=
+  - --rfc2136-tsig-secret-alg=hmac-sha256
+  - --rfc2136-tsig-axfr
