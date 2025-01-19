@@ -15,6 +15,17 @@ server:
     scrape_timeout: 10s
     evaluation_interval: 10s
 extraScrapeConfigs: |
+  # Emissary scrap
+  - job_name: 'emissary_ingress'
+    scrape_interval: 15s
+    metrics_path: '/metrics'
+    static_configs:
+      - targets:
+          - '<EMISSARY_SERVICE>:8877'
+        labels:
+          app: emissary-ingress
+          environment: production
+
   # Linkerd prometheus config
   - job_name: 'linkerd-controller'
     kubernetes_sd_configs:

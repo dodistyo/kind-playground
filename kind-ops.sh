@@ -6,13 +6,13 @@ stop_kind_cluster() {
     docker ps -q --filter "name=local" | xargs -r docker stop && \
     docker ps -a -q --filter "name=local" | xargs -r docker update --restart=no && \
     sudo systemctl stop named && \
-    manage_dns remove 172.18.0.1
+    dns_remove
 }
 
 start_kind_cluster() {
     docker ps -a -q --filter "name=local" | xargs -r docker start && \
     sudo systemctl start named && \
-    manage_dns add 172.18.0.1
+    dns_add
 }
 
 restart_kind_cluster() {
