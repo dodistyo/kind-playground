@@ -3,3 +3,4 @@ resources:
   - certificate.yaml
   - host
   - mapping
+  - workload

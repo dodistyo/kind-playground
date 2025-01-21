@@ -1,0 +1,14 @@
+---
+apiVersion: getambassador.io/v3alpha1
+kind: Host
+metadata:
+  name: app-host
+  annotations:
+    external-dns.ambassador-service: emissary-emissary-ingress.platform
+spec:
+  hostname: app.me
+  tlsSecret:
+    name: selfsigned-tls
+  requestPolicy:
+    insecure:
+      action: Redirect

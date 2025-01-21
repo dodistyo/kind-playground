@@ -1,0 +1,11 @@
+---
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
+metadata:
+  name: app-map
+spec:
+  hostname: app.me
+  prefix: /
+  service: nginx-service.app
+  timeout_ms: 180000 # 3 minutes
+  bypass_auth: true
