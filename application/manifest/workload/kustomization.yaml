@@ -2,3 +2,4 @@
 namespace: app
 resources:
   - nginx.yaml
+  - nginx-scaler.yaml

@@ -4,7 +4,7 @@ datasources:
   datasources.yaml:
     apiVersion: 1
     datasources:
-    - name: "Common Tools"
+    - name: "App"
       type: prometheus
       url: http://prometheus-server.monitoring
       access: proxy

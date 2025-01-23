@@ -1,0 +1,32 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: nginx-so
+  namespace: app
+  annotations:
+    scaledobject.keda.sh/transfer-hpa-ownership: "true"     # Optional. Use to transfer an existing HPA ownership to this ScaledObject
+    validations.keda.sh/hpa-ownership: "true"               # Optional. Use to disable HPA ownership validation on this ScaledObject
+    # autoscaling.keda.sh/paused: "true"                      # Optional. Use to pause autoscaling of objects explicitly
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1         # Optional. Default: apps/v1
+    kind: Deployment               # Optional. Default: Deployment
+    name: nginx-deployment                # Mandatory. Must be in the same namespace as the ScaledObject
+    # envSourceContainerName: {container-name}                # Optional. Default: .spec.template.spec.containers[0]
+  pollingInterval:  5                                      # Optional. Default: 30 seconds
+  cooldownPeriod:   300                                     # Optional. Default: 300 seconds
+  initialCooldownPeriod:  0                                 # Optional. Default: 0 seconds
+  idleReplicaCount: 0                                       # Optional. Default: ignored, must be less than minReplicaCount
+  minReplicaCount:  0                                       # Optional. Default: 0
+  maxReplicaCount:  5                                     # Optional. Default: 100
+  fallback:                                                 # Optional. Section to specify fallback options
+    failureThreshold: 3                                     # Mandatory if fallback section is included
+    replicas: 1                                         # Mandatory if fallback section is included
+  triggers:
+  - type: prometheus
+    metadata:
+      serverAddress: http://prometheus-server.monitoring  # Prometheus service URL in the cluster
+      metricName: emissary_request_rate     # Custom metric name for this scaler
+      query: |
+        irate(envoy_cluster_upstream_rq_total{envoy_cluster_name="nginx_service_app"}[15s])
+      threshold: "1"
