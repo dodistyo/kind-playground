@@ -6,6 +6,11 @@ metadata:
 spec:
   hostname: app.me
   prefix: /
-  service: nginx-service.app
+  add_request_headers:
+    Knative-Serving-Revision:
+      value: "nginx-00001"
+    Knative-Serving-Namespace:
+      value: "knative-serving"
+  service: nginx-00001.app.svc.cluster.local
   timeout_ms: 180000 # 3 minutes
   bypass_auth: true

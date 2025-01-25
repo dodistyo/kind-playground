@@ -1,0 +1,24 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: nginx
+  namespace: app
+  annotations:
+    networking.knative.dev/ingress.class: "ambassador.ingress.networking.knative.dev"
+spec:
+  template:
+    metadata:
+      annotations:
+        linkerd.io/inject: enabled
+    spec:
+      containers:
+        - image: nginx:latest
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "100m"
+            requests:
+              memory: "64Mi"
+              cpu: "20m"
+          ports:
+            - containerPort: 80
