@@ -2,10 +2,10 @@
 apiVersion: getambassador.io/v3alpha1
 kind: Mapping
 metadata:
-  name: app-map
+  name: store-map
 spec:
-  hostname: app.me
+  hostname: store.app.me
   prefix: /
-  service: keda-add-ons-http-interceptor-proxy.keda:8080 #nginx-service.app
+  service: frontend.app
   timeout_ms: 180000 # 3 minutes
   bypass_auth: true

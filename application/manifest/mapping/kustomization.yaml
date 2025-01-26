@@ -2,3 +2,4 @@ namespace: platform
 resources:
   - tools-mapping.yaml
   - app-mapping.yaml
+  - store-mapping.yaml

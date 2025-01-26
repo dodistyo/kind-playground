@@ -1,5 +1,5 @@
 dashboard:
-  enforcedHostRegexp: .*\.do\.di.*
+  enforcedHostRegexp: .*\.app\.me.*
   resources:
     limits:
       cpu: 200m

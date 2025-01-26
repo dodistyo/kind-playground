@@ -2,3 +2,4 @@ namespace: platform
 resources:
   - tools-host.yaml
   - app-host.yaml
+  - store-host.yaml
