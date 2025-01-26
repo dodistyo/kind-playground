@@ -1,0 +1,24 @@
+kind: HTTPScaledObject
+apiVersion: http.keda.sh/v1alpha1
+metadata:
+    name: nginx-scaled-object
+spec:
+    hosts:  # will filter host header, with or condition
+    - app.me
+    pathPrefixes: # will filter path prefix, with or condition. setting it to /, will allow all path prefixes
+    - /
+    scaleTargetRef:
+        apiVersion: apps/v1         # Optional. Default: apps/v1
+        kind: Deployment            # Optional. Default: Deployment
+        name: nginx-deployment      # Mandatory. Must be in the same namespace as the ScaledObject
+        service: nginx-service
+        port: 80
+    replicas:
+        min: 0
+        max: 10
+    scaledownPeriod: 60 # 60 seconds / 1 minutes
+    scalingMetric: # scaling based on request rate
+      requestRate: # request rate metric
+        granularity: 1s # request recorded every 1 second
+        targetValue: 100 # means 100 requests per granularity period that will trigger scaling
+        window: 1m # collected in 1 minute time windows

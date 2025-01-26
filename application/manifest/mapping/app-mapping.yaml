@@ -5,12 +5,7 @@ metadata:
   name: app-map
 spec:
   hostname: app.me
-  prefix: /
-  add_request_headers:
-    Knative-Serving-Revision:
-      value: "nginx-00001"
-    Knative-Serving-Namespace:
-      value: "knative-serving"
-  service: nginx-00001.app.svc.cluster.local
+  prefix: /service-a
+  service: keda-add-ons-http-interceptor-proxy.keda:8080 #nginx-service.app
   timeout_ms: 180000 # 3 minutes
   bypass_auth: true

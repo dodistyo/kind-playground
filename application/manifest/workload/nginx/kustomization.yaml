@@ -1,0 +1,5 @@
+
+namespace: app
+resources:
+  - nginx.yaml
+  - nignx-http-scaled-object.yaml
