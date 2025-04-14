@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: laravel-app
+  labels:
+    app: laravel
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: laravel
+  template:
+    metadata:
+      labels:
+        app: laravel
+    spec:
+      containers:
+        - name: laravel
+          image: laravel-app:latest
+          ports:
+            - containerPort: 9000
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+          env:
+            - name: APP_ENV
+              value: "production"
+            - name: APP_DEBUG
+              value: "true"
+            - name: APP_KEY
+              value: "base64:5ETziXQzIgdq0AEFr33Ml6BwC+6Kq0GP7bCSAPidpoM="
+            # - name: DB_CONNECTION
+            #   value: "mysql"
+            # - name: DB_HOST
+            #   value: "mysql-service"
+            # - name: DB_PORT
+            #   value: "3306"
+            # - name: DB_DATABASE
+            #   value: "laravel"
+            # - name: DB_USERNAME
+            #   value: "root"
+            # - name: DB_PASSWORD
+            #   value: "yourpassword"
+            # - name: CACHE_DRIVER
+            #   value: "redis"
+            # - name: SESSION_DRIVER
+            #   value: "redis"
+            # - name: QUEUE_CONNECTION
+            #   value: "database"

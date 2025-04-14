@@ -1,5 +1,6 @@
 service:
   loadBalancerIP: 172.18.1.100
+  externalTrafficPolicy: Local
 agent:
   enabled: false
 env:
