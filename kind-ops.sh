@@ -3,14 +3,14 @@ RESOLVED_CONF="/etc/systemd/resolved.conf"
 DNS_SERVER="172.18.0.1"
 
 stop_kind_cluster() {
-    docker ps -q --filter "name=local" | xargs -r docker stop && \
-    docker ps -a -q --filter "name=local" | xargs -r docker update --restart=no && \
+    docker ps -q --filter "name=kivotos" | xargs -r docker stop && \
+    docker ps -a -q --filter "name=kivotos" | xargs -r docker update --restart=no && \
     sudo systemctl stop named && \
     dns_remove
 }
 
 start_kind_cluster() {
-    docker ps -a -q --filter "name=local" | xargs -r docker start && \
+    docker ps -a -q --filter "name=kivotos" | xargs -r docker start && \
     sudo systemctl start named && \
     dns_add
 }

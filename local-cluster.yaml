@@ -1,9 +1,13 @@
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
+name: kivotos
 nodes:
 - role: control-plane
+  image: kindest/node:v1.33.0@sha256:91e9ed777db80279c22d1d1068c091b899b2078506e4a0f797fbf6e397c0b0b2
 - role: worker
+  image: kindest/node:v1.33.0@sha256:91e9ed777db80279c22d1d1068c091b899b2078506e4a0f797fbf6e397c0b0b2
 - role: worker
+  image: kindest/node:v1.33.0@sha256:91e9ed777db80279c22d1d1068c091b899b2078506e4a0f797fbf6e397c0b0b2
 networking:
   disableDefaultCNI: true
   podSubnet: "10.1.0.0/16"
